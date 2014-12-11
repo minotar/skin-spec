@@ -56,12 +56,12 @@ func (skin *mcSkin) removeAlpha(img *image.NRGBA) {
 
 ### Skin Serving
 
-##### Prior to 1.8 Release
+#### Prior to 1.8 Release
 
-Originally Mojang hosted all skins on Amazon S3: `http://s3.amazonaws.com/MinecraftSkins/%Username%.png`
-Valid users will respond with a skin PNG which has `Content-Type: application/octet-stream` are sent with accurate `Last-Modified` timestamps that can assist with caching.
+Originally Mojang used Amazon S3 to host all their skins: `http://s3.amazonaws.com/MinecraftSkins/%Username%.png`
+Valid users will still respond with an archived skin PNG which has `Content-Type: application/octet-stream` are sent with accurate `Last-Modified` timestamps that can assist with caching.
 
-Invalid users will result in a `403 Forbidden` and a `Content-Type: application/xml` error code of `AccessDenied`.
+Invalid users will result in a `403 Forbidden` and a `Content-Type: application/xml` error code of `AccessDenied`. This will likely also happen for users which were created after the switch away from S3 and therfore don't have a skin hosted there.
 
 #### Since 1.8 Release
 
