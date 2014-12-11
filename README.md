@@ -59,20 +59,24 @@ func (skin *mcSkin) removeAlpha(img *image.NRGBA) {
 #### Prior to 1.8 Release
 
 Originally Mojang used Amazon S3 to host all their skins: `http://s3.amazonaws.com/MinecraftSkins/%Username%.png`
-Valid users will still respond with an archived skin PNG which has `Content-Type: application/octet-stream` are sent with accurate `Last-Modified` timestamps that can assist with caching.
 
-Invalid users will result in a `403 Forbidden` and a `Content-Type: application/xml` error code of `AccessDenied`. This will likely also happen for users which were created after the switch away from S3 and therfore don't have a skin hosted there.
+Valid users will still respond with an archived skin PNG which has `Content-Type: application/octet-stream` and are sent with accurate `Last-Modified` timestamps that can assist with caching.
+
+Invalid users will result in a `403 Forbidden` and a `Content-Type: application/xml` error code of `AccessDenied`. This will likely also happen for users which were created after the switch away from S3 and therfore don't have a skin hosted there (untested).
 
 #### Since 1.8 Release
 
-Along with the switch to UUID, Mojang has made efforts to reduce the cost and strain on their infrastructure by making the multiplayer Minecraft server deliver skin to the client.
+Along with the switch to UUID, Mojang has made efforts to reduce the cost and strain on their infrastructure by making the multiplayer Minecraft server deliver the skin to the client.
 
 Further to this change, they now use Amazon EC2 instances for lookups/hosting the newer skins.
 
 Lookups happen to the address: `http://skins.minecraft.net/MinecraftSkins/%Username%.png`
-The response for a valid user is a `301 Moved Permanently` redirect to `textures.minecraft.net/texture/%TextureHash%` which then serves the skin as `Content-Type: image/png`.
+
+The response for a valid user is a `301 Moved Permanently` redirect to `http://textures.minecraft.net/texture/%TextureHash%` which then serves the skin as `Content-Type: image/png`.
 
 The response for invalid users is a `404 Not Found` while the response for being rate limited is the default Steve skin.
+
+The `%TextureHash%` appears to a hash of the skin which is then linked to the account.
 
 It is worth noting that there appears to be no optimization of the skins being served from the `textures.minecraft.net` address. In some instances where someone has used certain programs which add large amounts of meta data to the PNGs, you can easliy end up with skins 10x the size. This is worth considering if you plan to cache them.
 
