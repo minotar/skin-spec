@@ -54,6 +54,28 @@ func (skin *mcSkin) removeAlpha(img *image.NRGBA) {
 
 ```
 
+### Skin Serving
+
+##### Prior to 1.8 Release
+
+Originally Mojang hosted all skins on Amazon S3: `http://s3.amazonaws.com/MinecraftSkins/%Username%.png`
+Valid users will respond with a skin PNG which has `Content-Type: application/octet-stream` are sent with accurate `Last-Modified` timestamps that can assist with caching.
+
+Invalid users will result in a `403 Forbidden` and a `Content-Type: application/xml` error code of `AccessDenied`.
+
+#### Since 1.8 Release
+
+Along with the switch to UUID, Mojang has made efforts to reduce the cost and strain on their infrastructure by making the multiplayer Minecraft server deliver skin to the client.
+
+Further to this change, they now use Amazon EC2 instances for lookups/hosting the newer skins.
+
+Lookups happen to the address: `http://skins.minecraft.net/MinecraftSkins/%Username%.png`
+The response for a valid user is a `301 Moved Permanently` redirect to `textures.minecraft.net/texture/%TextureHash%` which then serves the skin as `Content-Type: image/png`.
+
+The response for invalid users is a `404 Not Found` while the response for being rate limited is the default Steve skin.
+
+It is worth noting that there appears to be no optimization of the skins being served from the `textures.minecraft.net` address. In some instances where someone has used certain programs which add large amounts of meta data to the PNGs, you can easliy end up with skins 10x the size. This is worth considering if you plan to cache them.
+
 ### Components
 
 The following is a list of components of the Minecraft skin.
