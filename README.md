@@ -82,7 +82,7 @@ Client side lookups are made to `https://sessionserver.mojang.com/session/minecr
 }
 ```
 
-The textures property is Base64 encoded string which decodes into JSON (%TimeStamp% is milliseconds since epoch):
+The textures property is Base64 encoded string which decodes into JSON (`%TimeStamp%` is milliseconds since epoch):
 ```JSON
 {  
     "timestamp":%TimeStamp%,
