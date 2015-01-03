@@ -68,7 +68,38 @@ Invalid users will result in a `403 Forbidden` and a `Content-Type: application/
 
 Along with the switch to UUID, Mojang has made efforts to reduce the cost and strain on their infrastructure by making the multiplayer Minecraft server deliver the skin to the client. They also now use Amazon EC2 instead of S3.
 
-Client lookups happen to the address: `http://skins.minecraft.net/MinecraftSkins/%Username%.png`
+Client side lookups are made to `https://sessionserver.mojang.com/session/minecraft/profile/%UUID%`.
+
+```JSON
+{
+  "id": "8ce569f21658431f96d4fd4db501505d",
+  "name": "connor4312",
+  "properties": [
+    {
+      "name": "textures",
+      "value": "eyJ0aW1lc3RhbXAiOjE0MjAyMzk1NjUxNTQsInByb2ZpbGVJZCI6IjhjZTU2OWYyMTY1ODQzMWY5NmQ0ZmQ0ZGI1MDE1MDVkIiwicHJvZmlsZU5hbWUiOiJjb25ub3I0MzEyIiwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2U3NzQ1NWI5ZjEzNzc4ZjI1NGNjOGYzYTUyYTNjZWQ0NGI4ZTk0OTFkMzEzYjEzOGRlOWVkNWE4NzgwNzIifX19"
+    }
+  ]
+}
+```
+
+The textures property is Base64 encoded JSON. When decoded, it looks like this:
+```JSON
+{
+  "timestamp": 1420239565154,
+  "profileId": "8ce569f21658431f96d4fd4db501505d",
+  "profileName": "connor4312",
+  "textures": {
+    "SKIN": {
+      "url": "http://textures.minecraft.net/texture/e77455b9f13778f254cc8f3a52a3ced44b8e9491d313b138de9ed5a878072"
+    }
+  }
+}
+```
+
+the textures object can have a `SKIN` and/or `CAPE` object, each with a `url` inside.
+
+Username lookups can still be made on the address: `http://skins.minecraft.net/MinecraftSkins/%Username%.png`
 
 The response for a valid user (case insensitive) is a `301 Moved Permanently` redirect to `http://textures.minecraft.net/texture/%TextureHash%` which then serves the skin as `Content-Type: image/png`.
 
