@@ -66,9 +66,9 @@ Invalid users will result in a `403 Forbidden` and a `Content-Type: application/
 
 #### Since 1.8 Release
 
-Along with the switch to UUID, Mojang has made efforts to reduce the cost and strain on their infrastructure by making the multiplayer Minecraft server deliver the skin to the client. They also now use Amazon EC2 instead of S3.
+Along with the switch to UUID, Mojang has made efforts to reduce the cost and strain on their infrastructure by making the multiplayer Minecraft server deliver the skin/textures to the client (after being verified by Mojang). CloudFront is more heavily used as well as EC2 app servers for returning JSON data. S3 is (likely) still used for backend storage of textures.
 
-Client side lookups are made to `https://sessionserver.mojang.com/session/minecraft/profile/%UUID%` with the response `Content-Type: application/json`:
+Initial Client side lookups are made to EC2 app servers behind a CloudFront endpoint (not caching, but reducing the impact of malicoius traffic) `https://sessionserver.mojang.com/session/minecraft/profile/%UUID%` with the response `Content-Type: application/json`:
 ```JSON
 {  
     "id":"d9135e082f2244c89cb0bee234155292",
@@ -81,6 +81,8 @@ Client side lookups are made to `https://sessionserver.mojang.com/session/minecr
     ]
 }
 ```
+
+The `sessionserver.mojang.com` domain uses very aggressive rate-limiting and will return a `429 429` [sic] if the same UUID is requested from the same source IP within 30 seconds.
 
 The textures property is Base64 encoded string which decodes into JSON (`%TimeStamp%` is milliseconds since epoch):
 ```JSON
@@ -102,7 +104,7 @@ Mojang have also implemented a similar style lookup address as they had with S3 
 
 The response for a valid user (case insensitive) is a `301 Moved Permanently` redirect to `http://textures.minecraft.net/texture/%TextureHash%` which then serves the skin as `Content-Type: image/png`.
 
-The response for invalid users is a `404 Not Found` while the response for being rate limited is the default Steve skin.
+The response for invalid users is a `404 Not Found` and all requests (valid or not) are cached by CloudFront.
 
 The `%TextureHash%` appears to be a hash of the skin which is then linked to the account.
 
