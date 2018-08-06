@@ -162,20 +162,20 @@ The following is a list of components of the Minecraft skin.
 | 1.8 | Left Arm | Front | `(36, 52, 40, 64)` | ✗ |
 | 1.8 | Left Arm | Left | `(40, 52, 44, 64)` | ✗ |
 | 1.8 | Left Arm | Back | `(44, 52, 48, 64)` | ✗ |
-| 1.8 | Right Leg Layer 2 | Top | `(4, 48, 8, 36)` | ✓ |
-| 1.8 | Right Leg Layer 2 | Bottom | `(8, 48, 12, 36)` | ✓ |
+| 1.8 | Right Leg Layer 2 | Top | `(4, 32, 8, 36)` | ✓ |
+| 1.8 | Right Leg Layer 2 | Bottom | `(8, 32, 12, 36)` | ✓ |
 | 1.8 | Right Leg Layer 2 | Right | `(0, 36, 4, 48)` | ✓ |
 | 1.8 | Right Leg Layer 2 | Front | `(4, 36, 8, 48)` | ✓ |
 | 1.8 | Right Leg Layer 2 | Left | `(8, 36, 12, 48)` | ✓ |
 | 1.8 | Right Leg Layer 2 | Back | `(12, 36, 16, 48)` | ✓ |
-| 1.8 | Torso Layer 2 | Top | `(20, 48, 28, 36)` | ✓ |
-| 1.8 | Torso Layer 2 | Bottom | `(28, 48, 36, 36)` | ✓ |
+| 1.8 | Torso Layer 2 | Top | `(20, 32, 28, 36)` | ✓ |
+| 1.8 | Torso Layer 2 | Bottom | `(28, 32, 36, 36)` | ✓ |
 | 1.8 | Torso Layer 2 | Right | `(16, 36, 20, 48)` | ✓ |
 | 1.8 | Torso Layer 2 | Front | `(20, 36, 28, 48)` | ✓ |
 | 1.8 | Torso Layer 2 | Left | `(28, 36, 32, 48)` | ✓ |
 | 1.8 | Torso Layer 2 | Back | `(32, 36, 40, 48)` | ✓ |
-| 1.8 | Right Arm Layer 2 | Top | `(44, 48, 48, 36)` | ✓ |
-| 1.8 | Right Arm Layer 2 | Bottom | `(48, 48, 52, 36)` | ✓ |
+| 1.8 | Right Arm Layer 2 | Top | `(44, 32, 48, 36)` | ✓ |
+| 1.8 | Right Arm Layer 2 | Bottom | `(48, 32, 52, 36)` | ✓ |
 | 1.8 | Right Arm Layer 2 | Right | `(40, 36, 44, 48)` | ✓ |
 | 1.8 | Right Arm Layer 2 | Front | `(44, 36, 48, 48)` | ✓ |
 | 1.8 | Right Arm Layer 2 | Left | `(48, 36, 52, 48)` | ✓ |
