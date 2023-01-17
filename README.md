@@ -106,7 +106,7 @@ The response for a valid user (case insensitive) is a `301 Moved Permanently` re
 
 The response for invalid users is a `404 Not Found` and all requests (valid or not) are cached by CloudFront.
 
-The `%TextureHash%` appears to be a hash of the skin which is then linked to the account.
+The `%TextureHash%` is a sha256 hash of the skin file. Note: Leading zeros (`0`) are removed, so is can actually be shorter than 64 chars.
 
 It is worth noting that there appears to be no optimization of the skins being served from the `textures.minecraft.net` address. In some instances where someone has used certain programs which add large amounts of meta data to the PNGs, you can easily end up with skins 10x the size. This is worth considering if you plan to cache them.
 
