@@ -23,7 +23,7 @@ The image dimensions may either be 64 by 32 pixels or 64 by 64 pixels. The forme
 
 The following image, from the Minecraft Wiki, is a useful reference. Portions included in the pre-1.8 skin version are solid coloured, new elements are checkered.
 
-![](http://hydra-media.cursecdn.com/minecraft.gamepedia.com/e/ef/1_8_texturemap_redux.png)
+<img src="https://minecraft.wiki/images/1_8_texturemap_redux.png" height="125" />
 
 ### Transparency
 
